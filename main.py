@@ -31,11 +31,15 @@ def get_top_10_prices() -> str:
     except Exception as e:
         return f"Couldn't fetch top 10 prices: {e}"
 
+@cl.on_chat_start
+async def start():
+    await cl.Message(content="🌠 Made by **Abdul Salam** | Live crypto prices only").send()
+
 @cl.on_message
 async def handle_message(message: cl.Message):
     user_input = message.content.strip().lower()
 
-    if "top 10" in user_input:
+    if "top 10 coins" in user_input:
         result = get_top_10_prices()
     elif "who created" in user_input or "made you" in user_input or "creator" in user_input:
         result = "😄 I was created by **Abdul Salam**!"
